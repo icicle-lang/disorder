@@ -13,7 +13,7 @@ description:           disorder-core.
 library
   build-depends:
                        base                            >= 3          && < 5
-                     , QuickCheck                      >= 2.7        && < 2.13
+                     , QuickCheck                      >= 2.12       && < 2.13
                      , directory                       >= 1.2        && < 1.6
                      , ieee754                         >= 0.7        && < 0.9
                      , quickcheck-text                 >= 0.1        && < 0.2
@@ -60,11 +60,11 @@ test-suite test
   build-depends:
                        base                            >= 3          && < 5
                      , ambiata-disorder-core
-                     , QuickCheck                      >= 2.8.2      && < 2.10
+                     , QuickCheck
                      , text
-                     , quickcheck-instances            == 0.3.*
-                     , ieee754                         >= 0.7        && < 0.9
-                     , transformers                    >= 0.3        && < 1
+                     , quickcheck-instances
+                     , ieee754
+                     , transformers
 
 test-suite test-cli
   type:                exitcode-stdio-1.0

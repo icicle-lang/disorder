@@ -4,6 +4,7 @@ module Disorder.Core.IO (
   , withCPUTime
   ) where
 
+import           Control.Monad (void)
 import           Control.Monad.IO.Class (liftIO, MonadIO)
 
 import           Test.QuickCheck
@@ -15,7 +16,7 @@ testIO :: Testable a => IO a -> Property
 testIO = testPropertyIO . run
 
 testPropertyIO :: Testable a => PropertyM IO a -> Property
-testPropertyIO = monadicIO . (=<<) stop
+testPropertyIO = monadicIO . (=<<) (void . stop)
 
 -- | Perform an action and return the CPU time it takes, in picoseconds
 -- (actual precision varies with implementation).
