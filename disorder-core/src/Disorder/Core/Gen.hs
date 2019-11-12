@@ -91,7 +91,7 @@ genFromMaybe g =
   suchThat g isJust >>= \ma ->
     case ma of
       Just a -> pure a
-      Nothing -> fail "Disorder.Core.Gen.genFromMaybe: Failed to generate a Just"
+      Nothing -> error "Disorder.Core.Gen.genFromMaybe: Failed to generate a Just"
 
 -- | Generate something smaller
 smaller :: Gen a -> Gen a
@@ -165,7 +165,7 @@ vectorOfUniqueBy' cmp s k g =
   where
     go 0 xs _ = pure xs
     go _ xs 0 =
-      fail $ "vectorOfUniqueBy' out of mana - are you trying to generate a list larger than the cardinality of the type? (" <> show (length xs) <> "/" <> show k <> ")"
+      error $ "vectorOfUniqueBy' out of mana - are you trying to generate a list larger than the cardinality of the type? (" <> show (length xs) <> "/" <> show k <> ")"
     go n xs mana' =
       g >>= \y -> case any (cmp y) xs of
         True -> go n xs $ mana' - 1
