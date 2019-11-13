@@ -110,14 +110,16 @@ install:
   - rm -rf cabal.project cabal.project.local cabal.project.freeze
   - touch cabal.project
   - |
+    echo "packages: disorder-aeson" >> cabal.project
     echo "packages: disorder-core" >> cabal.project
     echo "packages: disorder-corpus" >> cabal.project
     echo "packages: disorder-jack" >> cabal.project
   - |
     echo "constraints: cabal > 2" >> cabal.project
-  - "for pkg in $($HCPKG list --simple-output); do echo $pkg | sed 's/-[^-]*$//' | (grep -vE -- '^(ambiata-disorder-core|ambiata-disorder-corpus|ambiata-disorder-jack)$' || true) | sed 's/^/constraints: /' | sed 's/$/ installed/' >> cabal.project.local; done"
+  - "for pkg in $($HCPKG list --simple-output); do echo $pkg | sed 's/-[^-]*$//' | (grep -vE -- '^(ambiata-disorder-aeson|ambiata-disorder-core|ambiata-disorder-corpus|ambiata-disorder-jack)$' || true) | sed 's/^/constraints: /' | sed 's/$/ installed/' >> cabal.project.local; done"
   - cat cabal.project || true
   - cat cabal.project.local || true
+  - if [ -f "disorder-aeson/configure.ac" ]; then (cd "disorder-aeson" && autoreconf -i); fi
   - if [ -f "disorder-core/configure.ac" ]; then (cd "disorder-core" && autoreconf -i); fi
   - if [ -f "disorder-corpus/configure.ac" ]; then (cd "disorder-corpus" && autoreconf -i); fi
   - if [ -f "disorder-jack/configure.ac" ]; then (cd "disorder-jack" && autoreconf -i); fi
@@ -135,6 +137,7 @@ script:
   - cd ${DISTDIR} || false
   - find . -maxdepth 1 -type f -name '*.tar.gz' -exec tar -xvf '{}' \;
   - find . -maxdepth 1 -type f -name '*.tar.gz' -exec rm       '{}' \;
+  - PKGDIR_ambiata_disorder_aeson="$(find . -maxdepth 1 -type d -regex '.*/ambiata-disorder-aeson-[0-9.]*')"
   - PKGDIR_ambiata_disorder_core="$(find . -maxdepth 1 -type d -regex '.*/ambiata-disorder-core-[0-9.]*')"
   - PKGDIR_ambiata_disorder_corpus="$(find . -maxdepth 1 -type d -regex '.*/ambiata-disorder-corpus-[0-9.]*')"
   - PKGDIR_ambiata_disorder_jack="$(find . -maxdepth 1 -type d -regex '.*/ambiata-disorder-jack-[0-9.]*')"
@@ -142,12 +145,13 @@ script:
   - rm -rf cabal.project cabal.project.local cabal.project.freeze
   - touch cabal.project
   - |
+    echo "packages: ${PKGDIR_ambiata_disorder_aeson}" >> cabal.project
     echo "packages: ${PKGDIR_ambiata_disorder_core}" >> cabal.project
     echo "packages: ${PKGDIR_ambiata_disorder_corpus}" >> cabal.project
     echo "packages: ${PKGDIR_ambiata_disorder_jack}" >> cabal.project
   - |
     echo "constraints: cabal > 2" >> cabal.project
-  - "for pkg in $($HCPKG list --simple-output); do echo $pkg | sed 's/-[^-]*$//' | (grep -vE -- '^(ambiata-disorder-core|ambiata-disorder-corpus|ambiata-disorder-jack)$' || true) | sed 's/^/constraints: /' | sed 's/$/ installed/' >> cabal.project.local; done"
+  - "for pkg in $($HCPKG list --simple-output); do echo $pkg | sed 's/-[^-]*$//' | (grep -vE -- '^(ambiata-disorder-aeson|ambiata-disorder-core|ambiata-disorder-corpus|ambiata-disorder-jack)$' || true) | sed 's/^/constraints: /' | sed 's/$/ installed/' >> cabal.project.local; done"
   - cat cabal.project || true
   - cat cabal.project.local || true
   # Building...
@@ -159,9 +163,10 @@ script:
   # Testing...
   - ${CABAL} v2-test $WITHCOMPILER ${TEST} ${BENCH} all | color_cabal_output
   # cabal check...
-  # - (cd ${PKGDIR_ambiata_disorder_core} && ${CABAL} -vnormal check)
-  # - (cd ${PKGDIR_ambiata_disorder_corpus} && ${CABAL} -vnormal check)
-  # - (cd ${PKGDIR_ambiata_disorder_jack} && ${CABAL} -vnormal check)
+  - (cd ${PKGDIR_ambiata_disorder_aeson} && ${CABAL} -vnormal check)
+  - (cd ${PKGDIR_ambiata_disorder_core} && ${CABAL} -vnormal check)
+  - (cd ${PKGDIR_ambiata_disorder_corpus} && ${CABAL} -vnormal check)
+  - (cd ${PKGDIR_ambiata_disorder_jack} && ${CABAL} -vnormal check)
   # haddock...
   - ${CABAL} v2-haddock $WITHCOMPILER --with-haddock $HADDOCK ${TEST} ${BENCH} all | color_cabal_output
   # Building without installed constraints for packages in global-db...
