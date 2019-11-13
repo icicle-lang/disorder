@@ -82,19 +82,3 @@ test-suite test
                        Test.Disorder.Core.Property
                        Test.Disorder.Core.Tripping
                        Test.Disorder.Core.UniquePair
-
-test-suite test-cli
-  type:                exitcode-stdio-1.0
-
-  main-is:             test-cli.hs
-
-  ghc-options:         -Wall -threaded
-  if impl(ghc >= 8.0)
-    ghc-options: -fno-warn-redundant-constraints
-
-  hs-source-dirs:
-                       test
-
-  build-depends:
-                       base                            >= 3          && < 5
-                     , ambiata-disorder-core
