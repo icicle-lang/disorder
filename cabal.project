@@ -1,4 +1,5 @@
 packages:
+          disorder-aeson
           disorder-core
           disorder-corpus
           disorder-jack

@@ -1,6 +1,7 @@
 name:                  ambiata-disorder-aeson
 version:               0.0.1
-license:               AllRightsReserved
+license:               BSD3
+license-file:          LICENSE
 author:                Ambiata <info@ambiata.com>
 maintainer:            Ambiata <info@ambiata.com>
 copyright:             (c) 2015 Ambiata
@@ -9,6 +10,13 @@ category:              System
 cabal-version:         >= 1.8
 build-type:            Simple
 description:           disorder-aeson.
+
+tested-with:
+  GHC==8.0.2,
+  GHC==8.2.2,
+  GHC==8.4.4,
+  GHC==8.6.5,
+  GHC==8.8.1
 
 library
   build-depends:
@@ -34,7 +42,7 @@ test-suite test
 
   main-is:             test.hs
 
-  ghc-options:         -Wall -threaded -O2
+  ghc-options:         -Wall -threaded
 
   hs-source-dirs:
                        test

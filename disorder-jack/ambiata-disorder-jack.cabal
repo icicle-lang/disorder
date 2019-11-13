@@ -1,6 +1,7 @@
 name:                  ambiata-disorder-jack
 version:               0.0.1
-license:               AllRightsReserved
+license:               BSD3
+license-file:          LICENSE
 author:                Ambiata <info@ambiata.com>
 maintainer:            Ambiata <info@ambiata.com>
 copyright:             (c) 2015 Ambiata
@@ -57,7 +58,7 @@ test-suite test
 
   main-is:             test.hs
 
-  ghc-options:         -Wall -threaded -O2
+  ghc-options:         -Wall -threaded
 
   if impl(ghc >= 8.0)
     ghc-options:       -fno-warn-redundant-constraints
@@ -69,11 +70,20 @@ test-suite test
                        base                            >= 3          && < 5
                      , ambiata-disorder-core
                      , ambiata-disorder-jack
-                     , comonad                         >= 4.2        && < 5.1
-                     , containers                      >= 0.4        && < 0.6
-                     , pretty-show                     >= 1.6        && < 1.7
-                     , QuickCheck                      >= 2.7        && < 2.10
+                     , comonad
+                     , containers
+                     , pretty-show
+                     , QuickCheck
                      , quickcheck-instances            == 0.3.*
-                     , semigroups                      >= 0.16       && < 0.19
-                     , text                            >= 1.1        && < 1.3
-                     , transformers                    >= 0.3        && < 0.6
+                     , semigroups
+                     , text
+                     , transformers
+
+
+  other-modules:
+                       Test.Disorder.Jack.Combinators
+                       Test.Disorder.Jack.Core
+                       Test.Disorder.Jack.Minimal
+                       Test.Disorder.Jack.Property.Diff
+                       Test.Disorder.Jack.Shrink
+                       Test.Disorder.Jack.Tree

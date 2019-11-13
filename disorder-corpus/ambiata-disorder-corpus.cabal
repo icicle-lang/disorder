@@ -1,6 +1,7 @@
 name:                  ambiata-disorder-corpus
 version:               0.0.1
-license:               AllRightsReserved
+license:               BSD3
+license-file:          LICENSE
 author:                Ambiata <info@ambiata.com>
 maintainer:            Ambiata <info@ambiata.com>
 copyright:             (c) 2015 Ambiata
@@ -37,7 +38,7 @@ test-suite test
 
   main-is:             test.hs
 
-  ghc-options:         -Wall -threaded -O2
+  ghc-options:         -Wall -threaded
 
   hs-source-dirs:
                        test
@@ -47,3 +48,6 @@ test-suite test
                      , ambiata-disorder-corpus
                      , text
                      , QuickCheck
+
+  other-modules:
+                       Test.Disorder.Corpus

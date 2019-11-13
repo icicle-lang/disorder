@@ -1,6 +1,7 @@
 name:                  ambiata-disorder-core
 version:               0.0.1
-license:               AllRightsReserved
+license:               BSD3
+license-file:          LICENSE
 author:                Ambiata <info@ambiata.com>
 maintainer:            Ambiata <info@ambiata.com>
 copyright:             (c) 2015 Ambiata
@@ -57,7 +58,7 @@ test-suite test
 
   main-is:             test.hs
 
-  ghc-options:         -Wall -threaded -O2
+  ghc-options:         -Wall -threaded
   if impl(ghc >= 8.0)
     ghc-options: -fno-warn-redundant-constraints
 
@@ -73,12 +74,21 @@ test-suite test
                      , ieee754
                      , transformers
 
+  other-modules:
+                       Test.Disorder.Core.Combinators
+                       Test.Disorder.Core.Gen
+                       Test.Disorder.Core.IO
+                       Test.Disorder.Core.OrdPair
+                       Test.Disorder.Core.Property
+                       Test.Disorder.Core.Tripping
+                       Test.Disorder.Core.UniquePair
+
 test-suite test-cli
   type:                exitcode-stdio-1.0
 
   main-is:             test-cli.hs
 
-  ghc-options:         -Wall -threaded -O2
+  ghc-options:         -Wall -threaded
   if impl(ghc >= 8.0)
     ghc-options: -fno-warn-redundant-constraints
 
