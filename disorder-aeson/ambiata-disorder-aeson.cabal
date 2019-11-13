@@ -21,7 +21,7 @@ tested-with:
 library
   build-depends:
                        base                            >= 3          && < 6
-                     , aeson                           >= 0.8        && < 1.2
+                     , aeson                           >= 0.8        && < 1.5
                      , ambiata-disorder-core
                      , QuickCheck
                      , time
@@ -53,3 +53,7 @@ test-suite test
                      , aeson
                      , QuickCheck
                      , time
+
+  other-modules:
+                       Test.Disorder.Aeson
+                       Test.Disorder.Aeson.Time
