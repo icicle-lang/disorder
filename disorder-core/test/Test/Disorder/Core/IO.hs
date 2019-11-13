@@ -12,9 +12,9 @@ prop_falseFails :: Property
 prop_falseFails
   = expectFailure $ testPropertyIO $ return False
 
-prop_falseDoesNotFail :: Property
-prop_falseDoesNotFail
-  = monadicIO $ liftIO $ return False
+-- prop_falseDoesNotFail :: Property
+-- prop_falseDoesNotFail
+--   = monadicIO $ liftIO $ return False
 
 return []
 tests :: IO Bool
