@@ -56,8 +56,8 @@ genTrees ja jb =
         , infoJackMonad = run . runJack $ (,) `fmap` ja `ap` jb
         }
 
-prop_ap_all_the_things :: Property
-prop_ap_all_the_things =
+_prop_ap_all_the_things :: Property
+_prop_ap_all_the_things =
   let
     aa = chooseInt (1, 5)
     bb = chooseChar ('a', 'e')
