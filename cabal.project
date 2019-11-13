@@ -1,0 +1,7 @@
+packages:
+          disorder-core
+          disorder-corpus
+          disorder-jack
+
+constraints:
+  cabal > 2

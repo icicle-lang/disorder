@@ -1,8 +1,10 @@
-disorder
-========
+<div align="center">
 
-```
-"Lights are flashing, cars are crashing, getting frequent now"
-```
+# Disorder
+### A small library of useful quickcheck generators, laws and other bits and pieces.
 
-A small library of useful quickcheck generators, laws and other bits and pieces.
+[![Build Status](https://api.travis-ci.com/icicle-lang/disorder.svg?branch=master)](https://travis-ci.com/icicle-lang/disorder)
+
+</div>
+
+Slowly being deprecated and replaced with Hedgehog.
