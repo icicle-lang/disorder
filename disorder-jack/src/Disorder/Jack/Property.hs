@@ -96,11 +96,12 @@ gambleRender render =
 --   for displaying counterexampes.
 gambleDisplay :: Testable prop => (a -> String) -> Jack a -> (a -> prop) -> Property
 gambleDisplay render jack pf =
-  MkProperty $ do
-    tree <- runJack jack
-    unProperty . shrinking tree $ \x ->
-      counterexample (render x) $
-      pf x
+  QC.again $
+    MkProperty $ do
+      tree <- runJack jack
+      unProperty . shrinking tree $ \x ->
+        counterexample (render x) $
+        pf x
 
 -- | Use an existing 'Tree' to exercise a given property.
 shrinking :: Testable prop => Tree a -> (a -> prop) -> Property
