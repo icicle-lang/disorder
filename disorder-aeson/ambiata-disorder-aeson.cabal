@@ -21,7 +21,7 @@ tested-with:
 library
   build-depends:
                        base                            >= 3          && < 6
-                     , aeson                           >= 0.8        && < 1.5
+                     , aeson                           >= 0.8        && < 2.3
                      , ambiata-disorder-core
                      , QuickCheck
                      , time
